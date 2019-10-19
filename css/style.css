@@ -9,10 +9,6 @@ body {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#555555",endColorstr="#1d1d1d",GradientType=1);
 }
 
-header {
-    margin-bottom: 0px;
-}
-
 footer {
     background-color: #3f3f3f;
     color: #d5d5d5;
