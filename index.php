@@ -31,7 +31,7 @@
 
 				if($_SESSION['isLogged'] == FALSE)
 				{
-					echo '<form action="logowanie.php" method="post">';
+					echo '<form action="login.php" method="post">';
 					echo 'Login: <br><input type="text" name="login"><br>';
 					echo 'Hasło: <br><input type="password" name="password"><br><br>';
 					echo '<input type="submit" value="Zaloguj się"></form>';
