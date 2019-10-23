@@ -1,10 +1,13 @@
 <?php
 	session_start();
-	include_once("db.php");
+	if(!isset($_SESSION['isLogged']))
+		$_SESSION['isLogged'] = FALSE;
+	include_once("connect.php");
+
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,10 +21,30 @@
 </head>
 <body>
 <header class="jumbotron" style="margin-bottom: 0px;">
-	<h1>Wiersze, cytaty i zagadki</h1>
-	<h3>Blog poświęcony twórczości poetyckiej</h3>
+	<div class="row">
+		<div class="col-md-10">
+			<h1>Wiersze, cytaty i zagadki</h1>
+			<h3>Blog poświęcony twórczości poetyckiej</h3>
+		</div>
+		<div class="col-md-2">
+			<?php
+
+				if($_SESSION['isLogged'] == FALSE)
+				{
+					echo '<form action="logowanie.php" method="post">';
+					echo 'Login: <br><input type="text" name="login"><br>';
+					echo 'Hasło: <br><input type="password" name="password"><br><br>';
+					echo '<input type="submit" value="Zaloguj się"></form>';
+					if(isset($_SESSION['blad']))
+						echo $_SESSION['blad'];
+				} else {
+					echo '<p>Witaj '.$_SESSION['login'].'!<br>[<a href="logout.php">Wyloguj się!</a>]</p>';
+				}
+				
+			?>
+		</div>
+	</div>
 </header>
-<!-- Navigation -->
 <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
 
 	<button class="navbar-toggler" data-toggle="collapse" data-target="#collapse_target">
@@ -54,36 +77,43 @@
 </nav>
 
 <div class="row">
-	<div class="col-md-12" style="padding: 1%;">
+	<div class="col-md-6" style="padding: 5%;">
 		<?php
-			require_once("nbbc/nbbc.php");
-
-			$bbcode = new BBCode;
-
-			$sql = "SELECT * FROM posts ORDER BY id DESC";
-
-			$result = mysqli_query($db, $sql) or die(mysqli_error());
-
-			$posts = "";
-
-			if(mysqli_num_rows($result) > 0) {
-				while($row = mysqli_fetch_assoc($result)) {
-					$id = $row['id'];
-					$title = $row['title'];
-					$content = $row['content'];
-					$date = $row['date'];
-
-					$admin = "<div><a href='del_post.php?pid=$id'>Delete</a>$nbsp;<a href='edit_post.php?pid=$id'>Edit</a></div>";
-
-					$output = $bbcode->Parse($content);
-
-					$posts .= "<div><h2><a href='view_post.php?pid=$id'>$title</a></h2><h3>$date</h3><p>$output</p>$admin<hr></div>";
-				}
-				echo $posts;
+			$connection = @mysqli_connect($host, $login, $password, $name);
+			if (!$connection) {
+				echo "Nie udało się połączyć z bazą danych.";
 			} else {
-				echo "There are no posts to display<br><a href='post.php'>Click</a>";
+				require_once("nbbc/nbbc.php");
+				$bbcode = new BBCode;
+				$sql = "SELECT * FROM posts ORDER BY id DESC";
+				$result = mysqli_query($connection, $sql) or die(mysqli_error());
+				$posts = "";
+
+				if(mysqli_num_rows($result) > 0) {
+					while($row = mysqli_fetch_assoc($result)) {
+						$id = $row['id'];
+						$title = $row['title'];
+						$content = $row['content'];
+						$date = $row['date'];
+						$admin = "<div><a href='del_post.php?pid=$id'>Delete</a>&nbsp;<a href='edit_post.php?pid=$id'>Edit</a></div>";
+						$output = $bbcode->Parse($content);
+						$posts .= "<div><h2><a href='view_post.php?pid=$id'>$title</a></h2><h5>$date</h5><p>$output</p>$admin<hr></div>";
+					}
+					echo $posts;
+				} else {
+					echo '<h4 style="text-align: center;">Brak postów</h4><hr>';
+				}
+				$result->free_result();
+				$connection->close();
 			}
 		?>
+	</div>
+	<div class="col-md-6" style="padding: 5%;">
+		<form action="post.php" method="post" enctype="multipart/form-data">
+        	<input placeholder="Tytuł" name="title" type="text" autofocus size="48"><br/><br/>
+        	<textarea placeholder="Treść" name="content" rows="10" cols="50"></textarea><br/>
+        	<input name="post" type="submit" value="Wyślij">
+    	</form>
 	</div>
 </div>
 
@@ -103,7 +133,6 @@
 			</div>
 		</div>
 	</footer>
-
 </body>
 </html>
 
