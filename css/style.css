@@ -9,7 +9,7 @@ footer {
     color: #d5d5d5;
     padding-top: 2rem;
 }
-
+ 
 hr.light {
     border-top: 1px solid #d5d5d5;
     width: 25%;
@@ -28,4 +28,9 @@ hr.light-100 {
     margin-bottom: 1rem;
 }
 
+div.error {
+    color: red;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 
