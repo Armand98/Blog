@@ -138,173 +138,175 @@
 	<link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-<header class="jumbotron" style="margin-bottom: 0px;">
-	<div class="row">
-		<div class="col-md-10">
-			<h1>Wiersze, cytaty i zagadki</h1>
-			<h3>Blog poświęcony twórczości poetyckiej</h3>
-		</div>
-		<div class="col-md-2">
+    <header class="jumbotron" style="margin-bottom: 0px;">
+		<div class="row">
+			<div class="col-lg-9">
+				<h1>Wiersze, cytaty i zagadki</h1>
+				<h3>Blog poświęcony twórczości poetyckiej</h3>
+			</div>
+			<div class="col-lg-3">
 			<?php
-				if($_SESSION['isLogged'] == FALSE)
-				{
-					echo '<form action="login.php" method="post">';
-					echo 'Login: <br><input type="text" name="login"><br>';
-					echo 'Hasło: <br><input type="password" name="password"><br><br>';
-					echo '<input type="submit" value="Zaloguj się"></form>';
-					if(isset($_SESSION['blad']))
-                    {
-                        echo $_SESSION['blad'];
-                    }
-                } 
-                else 
-                {
-					echo '<p>Witaj '.$_SESSION['login'].'!<br>[<a href="logout.php">Wyloguj się!</a>]</p>';
-				}
-			?>
+					if($_SESSION['isLogged'] == FALSE)
+					{
+						echo '<form action="login.php" method="post">';
+						echo '<input class="form-control" placeholder="Login" type="text" name="login">';
+						echo '<br><input class="form-control" placeholder="Hasło" type="password" name="password"><br>';
+						echo '<input class="btn btn-secondary btn-block" type="submit" value="Zaloguj się"></form>';
+						if(isset($_SESSION['blad']))
+						{
+							echo $_SESSION['blad'];
+						}
+					} 
+					else 
+					{
+						echo '<p>Witaj '.$_SESSION['login'].'!<br>[<a href="logout.php">Wyloguj się!</a>]</p>';
+					}
+				?>
+			</div>
 		</div>
-	</div>
-</header>
-<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+    </header>
+    
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
 
-	<button class="navbar-toggler" data-toggle="collapse" data-target="#collapse_target">
-		<span class="navbar-toggler-icon"></span>
-	</button>
+		<button class="navbar-toggler" data-toggle="collapse" data-target="#collapse_target">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
-	<div class="collapse navbar-collapse" id="collapse_target">
-		<a class="navbar-brand"><img src="img/feather-ink-pen-512.png" width="50px" height="50px"></a>
-		<ul class="navbar-nav">
-			<li class="nav-link" href="#">
-				<a class="nav-link" href="#">O mnie</a>
-			</li>
-			<li class="nav-link" href="#">
-				<a class="nav-link" href="#">Zbiór wierszy</a>
-			</li>
-			<li class="nav-link" href="#">
-				<a class="nav-link dropdown-toggle" data-toggle="dropdown" data-target="dropdown_target" href="#">
-					Inne
-					<span class="caret"></span>
-				</a>
-				<div class="dropdown-menu" aria-labelledby="dropdown_target">
-					<ul class="navbar-nav">
-						<a class="dropdown-item" href="#">Cytaty</a>
-						<a class="dropdown-item" href="#">Zagadki</a>
-					</ul>
-				</div>
-			</li>	
-		</ul>
-	</div>
-</nav>
+		<div class="collapse navbar-collapse" id="collapse_target">
+			<a class="navbar-brand"><img src="img/feather-ink-pen-512.png" width="50px" height="50px"></a>
+			<ul class="navbar-nav">
+				<li class="nav-link" href="#">
+					<a class="nav-link" href="#">O mnie</a>
+				</li>
+				<li class="nav-link" href="#">
+					<a class="nav-link" href="#">Zbiór wierszy</a>
+				</li>
+				<li class="nav-link" href="#">
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown" data-target="dropdown_target" href="#">
+						Inne
+						<span class="caret"></span>
+					</a>
+					<div class="dropdown-menu" aria-labelledby="dropdown_target">
+						<ul class="navbar-nav">
+							<a class="dropdown-item" href="#">Cytaty</a>
+							<a class="dropdown-item" href="#">Zagadki</a>
+						</ul>
+					</div>
+				</li>	
+			</ul>
+		</div>
+	</nav>
 
-<div class="row register">
-    <div class=col-md-12>
-        <form method="post">
-            Login: <br><input type="text" value='<?php 
-                if(isset($_SESSION['fr_login']))
-                {
-                    echo $_SESSION['fr_login'];
-                    unset($_SESSION['fr_login']);
-                }
-            ?>' name="login"><br>
+    <div class="row">
+        <div class="col-md-12 d-flex justify-content-center m-4">
+            <form method="post">
+                <input class="form-control" type="text" placeholder="Login" value='<?php 
+                    if(isset($_SESSION['fr_login']))
+                    {
+                        echo $_SESSION['fr_login'];
+                        unset($_SESSION['fr_login']);
+                    }
+                ?>' name="login"><br>
 
-            <?php
-                if(isset($_SESSION['e_login']))
-                {
-                    echo '<div class="error">'.$_SESSION['e_login'].'</div>';
-                    unset($_SESSION['e_login']);
-                }
-            ?>
+                <?php
+                    if(isset($_SESSION['e_login']))
+                    {
+                        echo '<div class="alert alert-danger">'.$_SESSION['e_login'].'</div>';
+                        unset($_SESSION['e_login']);
+                    }
+                ?>
 
-            E-mail: <br><input type="text" value='<?php 
-                if(isset($_SESSION['fr_email']))
-                {
-                    echo $_SESSION['fr_email'];
-                    unset($_SESSION['fr_email']);
-                }
-            ?>' name="email"><br>
+                <input class="form-control" type="text" placeholder="Adres e-mail" value='<?php 
+                    if(isset($_SESSION['fr_email']))
+                    {
+                        echo $_SESSION['fr_email'];
+                        unset($_SESSION['fr_email']);
+                    }
+                ?>' name="email"><br>
 
-            <?php
-                if(isset($_SESSION['e_email']))
-                {
-                    echo '<div class="error">'.$_SESSION['e_email'].'</div>';
-                    unset($_SESSION['e_email']);
-                }
-            ?>
+                <?php
+                    if(isset($_SESSION['e_email']))
+                    {
+                        echo '<div class="alert alert-danger">'.$_SESSION['e_email'].'</div>';
+                        unset($_SESSION['e_email']);
+                    }
+                ?>
 
-            Twoje hasło: <br><input type="password" value='<?php 
-                if(isset($_SESSION['fr_password1']))
-                {
-                    echo $_SESSION['fr_password1'];
-                    unset($_SESSION['fr_password1']);
-                }
-            ?>' name="password1"><br>
+                <input class="form-control" type="password" placeholder="Hasło" value='<?php 
+                    if(isset($_SESSION['fr_password1']))
+                    {
+                        echo $_SESSION['fr_password1'];
+                        unset($_SESSION['fr_password1']);
+                    }
+                ?>' name="password1"><br>
 
-            <?php
-                if(isset($_SESSION['e_password']))
-                {
-                    echo '<div class="error">'.$_SESSION['e_password'].'</div>';
-                    unset($_SESSION['e_password']);
-                }
-            ?>
+                <?php
+                    if(isset($_SESSION['e_password']))
+                    {
+                        echo '<div class="alert alert-danger">'.$_SESSION['e_password'].'</div>';
+                        unset($_SESSION['e_password']);
+                    }
+                ?>
 
-            Powtórz hasło: <br><input type="password" value='<?php 
-                if(isset($_SESSION['fr_password2']))
-                {
-                    echo $_SESSION['fr_password2'];
-                    unset($_SESSION['fr_password2']);
-                }
-            ?>' name="password2"><br>
+                <input class="form-control" type="password" placeholder="Potwierdź hasło" value='<?php 
+                    if(isset($_SESSION['fr_password2']))
+                    {
+                        echo $_SESSION['fr_password2'];
+                        unset($_SESSION['fr_password2']);
+                    }
+                ?>' name="password2"><br>
 
-            <label>
-                <input type="checkbox" <?php 
-                if(isset($_SESSION['fr_regulations']))
-                {
-                    echo "checked";
-                    unset($_SESSION['fr_regulations']);
-                }
-            ?> name="regulations">Akceptuję
-            </label>
-            <a href="">regulamin</a><br>
+                <div class="form-group form-check">
+                    <input class="form-check-input" type="checkbox" <?php 
+                    if(isset($_SESSION['fr_regulations']))
+                    {
+                        echo "checked";
+                        unset($_SESSION['fr_regulations']);
+                    }
+                    ?> name="regulations">
+                    <label class="form-check-label" for="exampleCheck1">Akceptuję <a href="">regulamin</a></label>
+                </div>
+                
 
-            <?php
-                if(isset($_SESSION['e_regulations']))
-                {
-                    echo '<div class="error">'.$_SESSION['e_regulations'].'</div>';
-                    unset($_SESSION['e_regulations']);
-                }
-            ?>
+                <?php
+                    if(isset($_SESSION['e_regulations']))
+                    {
+                        echo '<div class="alert alert-danger">'.$_SESSION['e_regulations'].'</div>';
+                        unset($_SESSION['e_regulations']);
+                    }
+                ?>
 
-            <div class="g-recaptcha" data-sitekey="6LdzeMAUAAAAABdy4Qoitsvj5cW7wWavnug5MgWc"></div><br>
+                <div class="g-recaptcha" data-sitekey="6LdzeMAUAAAAABdy4Qoitsvj5cW7wWavnug5MgWc"></div><br>
 
-            <?php
-                if(isset($_SESSION['e_bot']))
-                {
-                    echo '<div class="error">'.$_SESSION['e_bot'].'</div>';
-                    unset($_SESSION['e_bot']);
-                }
-            ?>
+                <?php
+                    if(isset($_SESSION['e_bot']))
+                    {
+                        echo '<div class="alert alert-danger">'.$_SESSION['e_bot'].'</div>';
+                        unset($_SESSION['e_bot']);
+                    }
+                ?>
 
-            <input type="submit" value="Załóż konto">
-        </form>
-    </div>
-</div>
-
-<footer>
-    <div class="container-fluid padding">
-        <div class="row text-center">
-            <div class="col-md-12">
-                <hr class="light">
-                <h5>Kontakt</h5>
-                <hr class="light">
-                <p>e-mail: pajorarmand@gmail.com</p>
-            </div>
-            <div class="col-12">
-                <hr class="light-100">
-                <h5>&copy; Armand Pajor</h5>
-            </div>
+                <input class="btn btn-primary btn-block" type="submit" value="Załóż konto">
+            </form>
         </div>
     </div>
-</footer>
+
+    <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+		<div class="container-fluid padding">
+			<div class="row text-center">
+				<div class="col-md-12">
+					<hr class="light">
+					<h5>Kontakt</h5>
+					<hr class="light">
+					<p>e-mail: pajorarmand@gmail.com</p>
+				</div>
+				<div class="col-12">
+					<hr class="light-100">
+					<h5>&copy; Armand Pajor</h5>
+				</div>
+			</div>
+		</div>
+	</footer>
 </body>
 </html>
 

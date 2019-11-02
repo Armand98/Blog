@@ -34,10 +34,10 @@
                     unset($_SESSION['blad']);
                     $result->free_result();
                 } else {
-                    $_SESSION['blad'] = '<span style="color:red">Nieprawidłowy login lub hasło!</span>';
+                    $_SESSION['blad'] = '<div class="alert alert-danger">Nieprawidłowe dane!</div>';
                 }
             } else {
-                $_SESSION['blad'] = '<span style="color:red">Nieprawidłowy login lub hasło!</span>';
+                $_SESSION['blad'] = '<div class="alert alert-danger">Nieprawidłowe dane!</div>';
             }
         }
         header("Location: index.php");

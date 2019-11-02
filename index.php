@@ -20,112 +20,123 @@
 	<link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-<header class="jumbotron" style="margin-bottom: 0px;">
-	<div class="row">
-		<div class="col-md-10">
-			<h1>Wiersze, cytaty i zagadki</h1>
-			<h3>Blog poświęcony twórczości poetyckiej</h3>
-		</div>
-		<div class="col-md-2">
-		<a href="register.php">Załóż nowe konto!</a>
+	<header class="jumbotron" style="margin-bottom: 0px;">
+		<div class="row">
+			<div class="col-lg-9">
+				<h1>Wiersze, cytaty i zagadki</h1>
+				<h3>Blog poświęcony twórczości poetyckiej</h3>
+			</div>
+			<div class="col-lg-3">
 			<?php
-				if($_SESSION['isLogged'] == FALSE)
-				{
-					echo '<form action="login.php" method="post">';
-					echo 'Login: <br><input type="text" name="login"><br>';
-					echo 'Hasło: <br><input type="password" name="password"><br><br>';
-					echo '<input type="submit" value="Zaloguj się"></form>';
-					if(isset($_SESSION['blad']))
-						echo $_SESSION['blad'];
+					if($_SESSION['isLogged'] == FALSE)
+					{
+						echo '<form action="login.php" method="post">';
+						echo '<input class="form-control" placeholder="Login" type="text" name="login">';
+						echo '<br><input class="form-control" placeholder="Hasło" type="password" name="password"><br>';
+						echo '<input class="btn btn-secondary btn-block" type="submit" value="Zaloguj się"></form>';
+						if(isset($_SESSION['blad']))
+						{
+							echo $_SESSION['blad'];
+						}
+					} 
+					else 
+					{
+						echo '<p>Witaj '.$_SESSION['login'].'!<br>[<a href="logout.php">Wyloguj się!</a>]</p>';
+					}
+				?>
+			</div>
+		</div>
+	</header>
+
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+
+		<button class="navbar-toggler" data-toggle="collapse" data-target="#collapse_target">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="collapse_target">
+			<a class="navbar-brand"><img src="img/feather-ink-pen-512.png" width="50px" height="50px"></a>
+			<ul class="navbar-nav">
+				<li class="nav-link" href="#">
+					<a class="nav-link" href="#">O mnie</a>
+				</li>
+				<li class="nav-link" href="#">
+					<a class="nav-link" href="#">Zbiór wierszy</a>
+				</li>
+				<li class="nav-link" href="#">
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown" data-target="dropdown_target" href="#">
+						Inne
+						<span class="caret"></span>
+					</a>
+					<div class="dropdown-menu" aria-labelledby="dropdown_target">
+						<ul class="navbar-nav">
+							<a class="dropdown-item" href="#">Cytaty</a>
+							<a class="dropdown-item" href="#">Zagadki</a>
+						</ul>
+					</div>
+				</li>	
+			</ul>
+		</div>
+	</nav>
+
+	<div class="row">
+		<div class="col-md-6" style="padding: 5%;">
+			<?php
+				$connection = @mysqli_connect($db_host, $db_login, $db_password, $db_name);
+				if (!$connection) {
+					echo "Nie udało się połączyć z bazą danych.";
 				} else {
-					echo '<p>Witaj '.$_SESSION['login'].'!<br>[<a href="logout.php">Wyloguj się!</a>]</p>';
+					require_once("nbbc/nbbc.php");
+					$bbcode = new BBCode;
+					$sql = "SELECT * FROM posts ORDER BY post_id DESC";
+					$result = mysqli_query($connection, $sql) or die(mysqli_error());
+					$posts = "";
+
+					if(mysqli_num_rows($result) > 0) {
+						while($row = mysqli_fetch_assoc($result)) {
+							$id = $row['post_id'];
+							$title = $row['title'];
+							//$nickname = $row['nickname'];
+							$content = $row['content'];
+							$date = $row['post_date'];
+							$admin = "<div><a href='del_post.php?pid=$id'>Delete</a>&nbsp;<a href='edit_post.php?pid=$id'>Edit</a></div>";
+							$output = $bbcode->Parse($content);
+							$posts .= "<div>
+								<h2>
+									<a href='view_post.php?pid=$id'>$title</a>
+								</h2>
+								<h5>$date</h5>
+								<p>$output</p>$admin
+								<hr>
+							</div>";
+						}
+						echo $posts;
+					} else {
+						echo '<h4 style="text-align: center;">Brak postów</h4><hr>';
+					}
+					$result->free_result();
+					$connection->close();
 				}
 			?>
-			
 		</div>
-	</div>
-</header>
-<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
 
-	<button class="navbar-toggler" data-toggle="collapse" data-target="#collapse_target">
-		<span class="navbar-toggler-icon"></span>
-	</button>
-
-	<div class="collapse navbar-collapse" id="collapse_target">
-		<a class="navbar-brand"><img src="img/feather-ink-pen-512.png" width="50px" height="50px"></a>
-		<ul class="navbar-nav">
-			<li class="nav-link" href="#">
-				<a class="nav-link" href="#">O mnie</a>
-			</li>
-			<li class="nav-link" href="#">
-				<a class="nav-link" href="#">Zbiór wierszy</a>
-			</li>
-			<li class="nav-link" href="#">
-				<a class="nav-link dropdown-toggle" data-toggle="dropdown" data-target="dropdown_target" href="#">
-					Inne
-					<span class="caret"></span>
-				</a>
-				<div class="dropdown-menu" aria-labelledby="dropdown_target">
-					<ul class="navbar-nav">
-						<a class="dropdown-item" href="#">Cytaty</a>
-						<a class="dropdown-item" href="#">Zagadki</a>
-					</ul>
-				</div>
-			</li>	
-		</ul>
-	</div>
-</nav>
-
-<div class="row">
-	<div class="col-md-6" style="padding: 5%;">
 		<?php
-			$connection = @mysqli_connect($db_host, $db_login, $db_password, $db_name);
-			if (!$connection) {
-				echo "Nie udało się połączyć z bazą danych.";
-			} else {
-				require_once("nbbc/nbbc.php");
-				$bbcode = new BBCode;
-				$sql = "SELECT * FROM posts ORDER BY post_id DESC";
-				$result = mysqli_query($connection, $sql) or die(mysqli_error());
-				$posts = "";
-
-				if(mysqli_num_rows($result) > 0) {
-					while($row = mysqli_fetch_assoc($result)) {
-						$id = $row['post_id'];
-						$title = $row['title'];
-						//$nickname = $row['nickname'];
-						$content = $row['content'];
-						$date = $row['post_date'];
-						$admin = "<div><a href='del_post.php?pid=$id'>Delete</a>&nbsp;<a href='edit_post.php?pid=$id'>Edit</a></div>";
-						$output = $bbcode->Parse($content);
-						$posts .= "<div>
-							<h2>
-								<a href='view_post.php?pid=$id'>$title</a>
-							</h2>
-							<h5>$date</h5>
-							<p>$output</p>$admin
-							<hr>
-						</div>";
-					}
-					echo $posts;
-				} else {
-					echo '<h4 style="text-align: center;">Brak postów</h4><hr>';
-				}
-				$result->free_result();
-				$connection->close();
+			if($_SESSION['isLogged'])
+			{
+				echo '<div class="col-md-6 form-group" style="padding: 5%;">';
+				echo '<form action="post.php" method="post" enctype="multipart/form-data">';
+				echo '<input class="form-control" placeholder="Tytuł" name="title" type="text" autofocus size="48"><br/>';
+				echo '<textarea class="md-textarea form-control" placeholder="Treść" name="content" rows="10" cols="50"></textarea><br/>';
+				echo '<input class="btn btn-secondary btn-block" name="post" type="submit" value="Wyślij"></form></div>';
+			}
+			else
+			{
+				echo '<div class="col-md-6" style="padding: 5%;"><p>Zaloguj się lub <a href="register.php">załóż konto</a> by dodać swoje posty i komentować!</p></div>';
 			}
 		?>
 	</div>
-	<div class="col-md-6" style="padding: 5%;">
-		<form action="post.php" method="post" enctype="multipart/form-data">
-        	<input placeholder="Tytuł" name="title" type="text" autofocus size="48"><br/><br/>
-        	<textarea placeholder="Treść" name="content" rows="10" cols="50"></textarea><br/>
-        	<input name="post" type="submit" value="Wyślij">
-    	</form>
-	</div>
-</div>
 
-<footer>
+	<footer id="sticky-footer" class="py-4 bg-dark text-white-50">
 		<div class="container-fluid padding">
 			<div class="row text-center">
 				<div class="col-md-12">

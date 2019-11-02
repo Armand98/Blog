@@ -9,13 +9,11 @@
 	{
 		unset($_SESSION['registered']);
 	}
-
 	if(isset($_SESSION['fr_login'])) unset($_SESSION['fr_login']);
 	if(isset($_SESSION['fr_email'])) unset($_SESSION['fr_email']);
 	if(isset($_SESSION['fr_password1'])) unset($_SESSION['fr_password1']);
 	if(isset($_SESSION['fr_password2'])) unset($_SESSION['fr_password2']);
 	if(isset($_SESSION['fr_regulations'])) unset($_SESSION['fr_regulations']);
-
 	if(isset($_SESSION['e_login'])) unset($_SESSION['e_login']);
 	if(isset($_SESSION['e_email'])) unset($_SESSION['e_email']);
 	if(isset($_SESSION['e_password'])) unset($_SESSION['e_password']);
@@ -37,66 +35,71 @@
 	<link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-<header class="jumbotron" style="margin-bottom: 0px;">
-	<div class="row">
-		<div class="col-md-10">
-			<h1>Wiersze, cytaty i zagadki</h1>
-			<h3>Blog poświęcony twórczości poetyckiej</h3>
-		</div>
-		<div class="col-md-2">
-		<a href="register.php">Załóż nowe konto!</a>
+	<header class="jumbotron" style="margin-bottom: 0px;">
+		<div class="row">
+			<div class="col-lg-9">
+				<h1>Wiersze, cytaty i zagadki</h1>
+				<h3>Blog poświęcony twórczości poetyckiej</h3>
+			</div>
+			<div class="col-lg-3">
 			<?php
-				if($_SESSION['isLogged'] == FALSE)
-				{
-					echo '<form action="login.php" method="post">';
-					echo 'Login: <br><input type="text" name="login"><br>';
-					echo 'Hasło: <br><input type="password" name="password"><br><br>';
-					echo '<input type="submit" value="Zaloguj się"></form>';
-					if(isset($_SESSION['blad']))
-						echo $_SESSION['blad'];
-				} else {
-					echo '<p>Witaj '.$_SESSION['login'].'!<br>[<a href="logout.php">Wyloguj się!</a>]</p>';
-				}
-			?>
+					if($_SESSION['isLogged'] == FALSE)
+					{
+						echo '<form action="login.php" method="post">';
+						echo '<input class="form-control" placeholder="Login" type="text" name="login">';
+						echo '<br><input class="form-control" placeholder="Hasło" type="password" name="password"><br>';
+						echo '<input class="btn btn-secondary btn-block" type="submit" value="Zaloguj się"></form>';
+						if(isset($_SESSION['blad']))
+						{
+							echo $_SESSION['blad'];
+						}
+					} 
+					else 
+					{
+						echo '<p>Witaj '.$_SESSION['login'].'!<br>[<a href="logout.php">Wyloguj się!</a>]</p>';
+					}
+				?>
+			</div>
 		</div>
+	</header>
+
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+
+		<button class="navbar-toggler" data-toggle="collapse" data-target="#collapse_target">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="collapse_target">
+			<a class="navbar-brand"><img src="img/feather-ink-pen-512.png" width="50px" height="50px"></a>
+			<ul class="navbar-nav">
+				<li class="nav-link" href="#">
+					<a class="nav-link" href="#">O mnie</a>
+				</li>
+				<li class="nav-link" href="#">
+					<a class="nav-link" href="#">Zbiór wierszy</a>
+				</li>
+				<li class="nav-link" href="#">
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown" data-target="dropdown_target" href="#">
+						Inne
+						<span class="caret"></span>
+					</a>
+					<div class="dropdown-menu" aria-labelledby="dropdown_target">
+						<ul class="navbar-nav">
+							<a class="dropdown-item" href="#">Cytaty</a>
+							<a class="dropdown-item" href="#">Zagadki</a>
+						</ul>
+					</div>
+				</li>	
+			</ul>
+		</div>
+	</nav>
+
+	<div class="alert alert-success welcome" role="alert">
+	<h4 class="alert-heading text-center">Gratulacje!</h4>
+	<p class="text-center">Możesz już zalogować się na swoje konto.</p>
 	</div>
-</header>
-<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
 
-	<button class="navbar-toggler" data-toggle="collapse" data-target="#collapse_target">
-		<span class="navbar-toggler-icon"></span>
-	</button>
-
-	<div class="collapse navbar-collapse" id="collapse_target">
-		<a class="navbar-brand"><img src="img/feather-ink-pen-512.png" width="50px" height="50px"></a>
-		<ul class="navbar-nav">
-			<li class="nav-link" href="#">
-				<a class="nav-link" href="#">O mnie</a>
-			</li>
-			<li class="nav-link" href="#">
-				<a class="nav-link" href="#">Zbiór wierszy</a>
-			</li>
-			<li class="nav-link" href="#">
-				<a class="nav-link dropdown-toggle" data-toggle="dropdown" data-target="dropdown_target" href="#">
-					Inne
-					<span class="caret"></span>
-				</a>
-				<div class="dropdown-menu" aria-labelledby="dropdown_target">
-					<ul class="navbar-nav">
-						<a class="dropdown-item" href="#">Cytaty</a>
-						<a class="dropdown-item" href="#">Zagadki</a>
-					</ul>
-				</div>
-			</li>	
-		</ul>
-	</div>
-</nav>
-<br>
-<h2>Dziękujemy za rejestrację!</h2><br>
-<h3>Możesz już zalogować się na swoje konto!</h3><br>
-<a href="index.php">Zaloguj się na swoje konto!</a>
-
-<footer>
+	<footer id="sticky-footer" class="py-4 bg-dark text-white-50">
 		<div class="container-fluid padding">
 			<div class="row text-center">
 				<div class="col-md-12">
