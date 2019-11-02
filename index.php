@@ -92,8 +92,8 @@
 				} 
 				else 
 				{
-					require_once("nbbc/nbbc.php");
-					$bbcode = new BBCode;
+					require_once("Bbcode/BbCode.php");
+					$bbcode = new BbCode();
 					$sql = "SELECT * FROM posts ORDER BY post_id DESC";
 					$result = mysqli_query($connection, $sql) or die(mysqli_error());
 					$posts = "";
@@ -171,7 +171,8 @@
 				['fontsize', ['fontsize']],
 				['color', ['color']],
 				['para', ['ul', 'ol', 'paragraph']],
-				['height', ['height']]
+				['height', ['height']],
+				['view', ['codeview']]
 			],
 		});
 	</script>
