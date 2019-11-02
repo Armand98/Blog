@@ -18,6 +18,9 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 	<link href="css/style.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+	<script src="scripts/summernote-pl-PL.js"></script>
 </head>
 <body>
 	<header class="jumbotron" style="margin-bottom: 0px;">
@@ -83,9 +86,12 @@
 		<div class="col-md-6" style="padding: 5%;">
 			<?php
 				$connection = @mysqli_connect($db_host, $db_login, $db_password, $db_name);
-				if (!$connection) {
+				if (!$connection) 
+				{
 					echo "Nie udało się połączyć z bazą danych.";
-				} else {
+				} 
+				else 
+				{
 					require_once("nbbc/nbbc.php");
 					$bbcode = new BBCode;
 					$sql = "SELECT * FROM posts ORDER BY post_id DESC";
@@ -96,23 +102,21 @@
 						while($row = mysqli_fetch_assoc($result)) {
 							$id = $row['post_id'];
 							$title = $row['title'];
-							//$user_id = $row['user_id'];
+							$login = $row['login'];
 							$content = $row['content'];
 							$date = $row['post_date'];
-							$admin = "<div><a href='del_post.php?pid=$id'>Delete</a>&nbsp;<a href='edit_post.php?pid=$id'>Edit</a></div>";
 							$output = $bbcode->Parse($content);
-							$posts .= "<div>
-								<h2>
-									<a href='view_post.php?pid=$id'>$title</a>
-								</h2>
-								<h5>$date</h5>
-								<p>$output</p>$admin
-								<hr>
-							</div>";
+							$admin = "<div><a href='del_post.php?pid=$id'>Delete</a>&nbsp;<a href='edit_post.php?pid=$id'>Edit</a></div>";
+							$posts .= '<div class="alert alert-dark" role="alert">';
+							$posts .= '<h3 class="alert-heading text-center"><a href="">'.$title.'</a></h3>';
+							$posts .= '<div class="d-flex justify-content-between">';
+							$posts .= "<h5>$login</h5><h5>$date</h5></div>";
+							$posts .= '<hr><div class="text-justify">'.$output.'</div><hr>';
+							$posts .= "$admin</div>";
 						}
 						echo $posts;
 					} else {
-						echo '<h4 style="text-align: center;">Brak postów</h4><hr>';
+						echo '<h4 class="alert-heading text-center" style="text-align: center;">Brak postów</h4><hr>';
 					}
 					$result->free_result();
 					$connection->close();
@@ -125,8 +129,8 @@
 			{
 				echo '<div class="col-md-6 form-group" style="padding: 5%;">';
 				echo '<form action="post.php" method="post" enctype="multipart/form-data">';
-				echo '<input class="form-control" placeholder="Tytuł" name="title" type="text" autofocus size="48"><br/>';
-				echo '<textarea class="md-textarea form-control" placeholder="Treść" name="content" rows="10" cols="50"></textarea><br/>';
+				echo '<input class="form-control" placeholder="Tytuł" name="title" type="text" autofocus size="48"><br>';
+				echo '<textarea id="summernote" name="content"></textarea><br>';
 				echo '<input class="btn btn-secondary btn-block" name="post" type="submit" value="Wyślij"></form></div>';
 			}
 			else
@@ -152,6 +156,17 @@
 			</div>
 		</div>
 	</footer>
+	<script>
+		$('#summernote').summernote({
+			placeholder: 'Treść',
+			tabsize: 2,
+			height: 300,
+			minHeight: 100,
+			maxHeight: 500,
+			focus: true,
+			lang: 'pl-PL'
+		});
+	</script>
 </body>
 </html>
 
