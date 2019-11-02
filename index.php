@@ -96,7 +96,7 @@
 						while($row = mysqli_fetch_assoc($result)) {
 							$id = $row['post_id'];
 							$title = $row['title'];
-							//$nickname = $row['nickname'];
+							//$user_id = $row['user_id'];
 							$content = $row['content'];
 							$date = $row['post_date'];
 							$admin = "<div><a href='del_post.php?pid=$id'>Delete</a>&nbsp;<a href='edit_post.php?pid=$id'>Edit</a></div>";

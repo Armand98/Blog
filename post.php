@@ -16,7 +16,8 @@
             $title = mysqli_real_escape_string($connection, $title);
             $content = mysqli_real_escape_string($connection, $content);
             $date = date('Y-m-d H:i:s');
-            $sql = "INSERT INTO posts (user_id, title ,content, post_date) VALUES (1, '$title', '$content', '$date')";
+            $login = $_SESSION['login'];
+            $sql = "INSERT INTO posts (login, title ,content, post_date) VALUES ('$login, '$title', '$content', '$date')";
     
             if($title == "" || $content == "") {
                 echo "Please complete your post!";
