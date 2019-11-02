@@ -1,7 +1,7 @@
 <?php
     session_start();
     include_once("connect.php");
-    $connection = @mysqli_connect($host, $login, $password, $name);
+    $connection = @mysqli_connect($db_host, $db_login, $db_password, $db_name);
 
     if (!$connection) 
     {
