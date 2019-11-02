@@ -66,7 +66,7 @@
         },
         style: {
           style: 'Styl',
-          p: 'pny',
+          p: 'Paragraf',
           blockquote: 'Cytat',
           pre: 'Kod',
           h1: 'Nagłówek 1',
