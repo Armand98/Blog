@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Czas generowania: 01 Lis 2019, 13:41
+-- Czas generowania: 03 Lis 2019, 20:07
 -- Wersja serwera: 5.7.26
 -- Wersja PHP: 7.2.18
 
@@ -31,15 +31,23 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `comments`;
 CREATE TABLE IF NOT EXISTS `comments` (
   `comment_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
+  `comment_login` varchar(25) COLLATE utf8_polish_ci NOT NULL,
   `post_id` int(11) NOT NULL,
   `comment_date` datetime NOT NULL,
-  `content` varchar(255) COLLATE utf8_polish_ci NOT NULL,
+  `comment_text` varchar(255) COLLATE utf8_polish_ci NOT NULL,
   PRIMARY KEY (`comment_id`),
   UNIQUE KEY `comment_id` (`comment_id`),
-  KEY `user_id` (`user_id`),
   KEY `post_id` (`post_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+--
+-- Zrzut danych tabeli `comments`
+--
+
+INSERT INTO `comments` (`comment_id`, `comment_login`, `post_id`, `comment_date`, `comment_text`) VALUES
+(4, 'armand', 23, '2019-11-03 19:36:52', 'Komentarz testowy'),
+(3, 'armand', 23, '2019-11-03 19:36:40', 'test'),
+(5, 'armand', 23, '2019-11-03 19:37:22', 'No nareszcie dziaÅ‚ajÄ… xD');
 
 -- --------------------------------------------------------
 
@@ -50,14 +58,21 @@ CREATE TABLE IF NOT EXISTS `comments` (
 DROP TABLE IF EXISTS `posts`;
 CREATE TABLE IF NOT EXISTS `posts` (
   `post_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
+  `login` varchar(25) COLLATE utf8_polish_ci NOT NULL,
   `title` varchar(50) COLLATE utf8_polish_ci NOT NULL,
   `content` varchar(1000) COLLATE utf8_polish_ci NOT NULL,
   `post_date` datetime NOT NULL,
   PRIMARY KEY (`post_id`),
-  UNIQUE KEY `post_id` (`post_id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+  UNIQUE KEY `post_id` (`post_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+--
+-- Zrzut danych tabeli `posts`
+--
+
+INSERT INTO `posts` (`post_id`, `login`, `title`, `content`, `post_date`) VALUES
+(19, 'armand', 'Post1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consequat nibh massa, id eleifend mi euismod sit amet. Vestibulum id massa nunc. Vivamus cursus semper tellus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus hendrerit nunc vitae orci blandit, non dignissim risus volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pellentesque scelerisque elementum. Praesent id turpis sit amet lacus blandit hendrerit.', '2019-11-03 11:55:23'),
+(20, 'armand', 'Post2', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consequat nibh massa, id eleifend mi euismod sit amet. Vestibulum id massa nunc. Vivamus cursus semper tellus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus hendrerit nunc vitae orci blandit, non dignissim risus volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pellentesque scelerisque elementum. Praesent id turpis sit amet lacus blandit hendrerit.', '2019-11-03 11:55:29');
 
 -- --------------------------------------------------------
 
@@ -72,17 +87,18 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(255) COLLATE utf8_polish_ci NOT NULL,
   `email` varchar(50) COLLATE utf8_polish_ci NOT NULL,
   `user_date` datetime NOT NULL,
+  `privilege` int(2) NOT NULL DEFAULT '0',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_id` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 --
 -- Zrzut danych tabeli `users`
 --
 
-INSERT INTO `users` (`user_id`, `login`, `password`, `email`, `user_date`) VALUES
-(3, 'armandi', '$2y$10$jlrBZvhE3y230eOkHTBVm.4Ox4OI.GQ8EHo7xvcHP2nwWzVq6fnQy', 'pajor@gmail.com', '2019-11-01 00:33:26'),
-(2, 'armand', '$2y$10$eXSFWrX.9cHY7NKRTfrc9OcaSUbWpCmUDlseEL6HNTGv.WHm0kILq', 'armand@gmail.com', '2019-11-01 00:12:25');
+INSERT INTO `users` (`user_id`, `login`, `password`, `email`, `user_date`, `privilege`) VALUES
+(4, 'armand', '$2y$10$zNfSERUfS64oJ/F6604A3.J1t4ZTeYO/SmxtI2KebCQiz2eg8PLre', 'armand@gmail.com', '2019-11-01 23:33:05', 1),
+(5, 'user1', '$2y$10$L1xKhOKXvQYW0hcsTYQb0eITmHNzfKHOqaIw8fG34VkBgX3N.x.kC', 'user1@gmail.com', '2019-11-03 10:13:48', 0);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
