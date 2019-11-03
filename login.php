@@ -9,39 +9,47 @@
 
     require_once("connect.php");
 
-    $connection = @mysqli_connect($db_host, $db_login, $db_password, $db_name);
-
-    if (!$connection) {
-        die("Nie udało się połączyć z bazą danych.");
-    } else {
-        $login = $_POST['login'];
-        $password = $_POST['password'];
-    
-        $sql = sprintf("SELECT * FROM users WHERE login='%s'",
-                        mysqli_real_escape_string($connection, $login));
-    
-        if($result = @mysqli_query($connection, $sql))
+    try 
+    {
+        $connection = @mysqli_connect($db_host, $db_login, $db_password, $db_name);
+        if (!$connection) 
         {
-            $usersQuantity = mysqli_num_rows($result);
-            if($usersQuantity > 0)
+            throw new Exception(mysqli_connect_errno());
+        }
+        else
+        {
+            $login = $_POST['login'];
+            $password = $_POST['password'];
+            $sql = sprintf("SELECT * FROM users WHERE login='%s'", mysqli_real_escape_string($connection, $login));
+        
+            if($result = @mysqli_query($connection, $sql))
             {
-                $row = $result->fetch_assoc();
-
-                if(password_verify($password, $row['password']))
+                $usersQuantity = mysqli_num_rows($result);
+                if($usersQuantity > 0)
                 {
-                    $_SESSION['isLogged'] = TRUE;
-                    $_SESSION['login'] = $row['login'];
-                    $_SESSION['privilege'] = $row['privilege'];
-                    unset($_SESSION['blad']);
-                    $result->free_result();
+                    $row = $result->fetch_assoc();
+
+                    if(password_verify($password, $row['password']))
+                    {
+                        $_SESSION['isLogged'] = TRUE;
+                        $_SESSION['login'] = $row['login'];
+                        $_SESSION['privilege'] = $row['privilege'];
+                        unset($_SESSION['blad']);
+                        $result->free_result();
+                    } else {
+                        $_SESSION['blad'] = '<div class="alert alert-danger">Nieprawidłowe dane!</div>';
+                    }
                 } else {
                     $_SESSION['blad'] = '<div class="alert alert-danger">Nieprawidłowe dane!</div>';
                 }
-            } else {
-                $_SESSION['blad'] = '<div class="alert alert-danger">Nieprawidłowe dane!</div>';
             }
+            header("Location: index.php");
+            $connection->close();
         }
-        header("Location: index.php");
-        $connection->close();
+    }
+    catch (Exception $e) 
+    {
+        echo '<span style="color:red;">Błąd serwera! Przepraszamy za niedogoności i prosimy o rejestrację w innym terminie!</span>';
+        echo '<br>Informacja developerska: '.$e;
     }
 ?>

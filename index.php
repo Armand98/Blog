@@ -85,55 +85,60 @@
 	<div class="row">
 		<div class="col-md-6" style="padding: 5%;">
 			<?php
-				$connection = @mysqli_connect($db_host, $db_login, $db_password, $db_name);
-				if (!$connection) 
+				try
 				{
-					echo "Nie udało się połączyć z bazą danych.";
-				} 
-				else 
-				{
-					require_once("Bbcode/BbCode.php");
-					$bbcode = new BbCode();
-					$sql = "SELECT * FROM posts ORDER BY post_id DESC";
-					$result = mysqli_query($connection, $sql) or die(mysqli_error());
-					$posts = "";
+					$connection = @mysqli_connect($db_host, $db_login, $db_password, $db_name);
 
-					if(mysqli_num_rows($result) > 0) {
-						while($row = mysqli_fetch_assoc($result)) {
-							$id = $row['post_id'];
-							$title = $row['title'];
-							$login = $row['login'];
-							$content = $row['content'];
-							$date = $row['post_date'];
-							$output = $bbcode->Parse($content);
-							$admin = "<div><a href='del_post.php?pid=$id'>Delete</a>&nbsp;<a href='edit_post.php?pid=$id'>Edit</a></div>";
-							$posts .= '<div class="alert alert-dark" role="alert">';
-							$posts .= '<h3 class="alert-heading text-center"><a href="">'.$title.'</a></h3>';
-							$posts .= '<div class="d-flex justify-content-between">';
-							$posts .= "<h5>$login</h5><h5>$date</h5></div>";
-							$posts .= '<hr><div class="text-justify">'.$output.'</div><hr>';
-							if($_SESSION['isLogged'])
-							{
-								if((isset($_SESSION['privilege'])) && ($_SESSION['privilege'] == 1))
+					if (!$connection) 
+					{
+						throw new Exception(mysqli_connect_errno());
+					} 
+					else 
+					{
+						require_once("Bbcode/BbCode.php");
+						$bbcode = new BbCode();
+						$sql = "SELECT * FROM posts ORDER BY post_id DESC";
+						$result = mysqli_query($connection, $sql) or die(mysqli_error());
+						$posts = "";
+
+						if(mysqli_num_rows($result) > 0) {
+							while($row = mysqli_fetch_assoc($result)) {
+								$id = $row['post_id'];
+								$title = $row['title'];
+								$login = $row['login'];
+								$content = $row['content'];
+								$date = $row['post_date'];
+								$output = $bbcode->Parse($content);
+								$admin = "<a href='del_post.php?pid=$id'>Delete</a><a href='index.php?pid=$id'>Edit</a>";
+								$comment = "<div><a href='comment_post.php?pid=$id'>Comment</a></div>";
+								$posts .= '<div class="alert alert-dark" role="alert">';
+								$posts .= '<h3 class="alert-heading text-center"><a href="">'.$title.'</a></h3>';
+								$posts .= '<div class="d-flex justify-content-between">';
+								$posts .= "<h5>$login</h5><h5>$date</h5></div>";
+								$posts .= '<hr><div class="text-justify">'.$output.'</div><hr>';
+								$posts .= '<div class="d-flex justify-content-around">';
+
+								if($_SESSION['isLogged'])
 								{
-									$posts .= "$admin</div>";
+									if((isset($_SESSION['privilege'])) && ($_SESSION['privilege'] == 1))
+									{
+										$posts .= $admin;
+									}
 								}
-								else
-								{
-									$posts .= "</div>";
-								}
+
+								$posts .= $comment;
+								$posts .= "</div></div>";
 							}
-							else
-							{
-								$posts .= "</div>";
-							}
+							echo $posts;
+						} else {
+							echo '<h4 class="alert-heading text-center" style="text-align: center;">Brak postów</h4><hr>';
 						}
-						echo $posts;
-					} else {
-						echo '<h4 class="alert-heading text-center" style="text-align: center;">Brak postów</h4><hr>';
+						$result->free_result();
 					}
-					$result->free_result();
 					$connection->close();
+				} catch (Exception $e) {
+					echo '<span style="color:red;">Błąd serwera! Przepraszamy za niedogoności i prosimy o rejestrację w innym terminie!</span>';
+					echo '<br>Informacja developerska: '.$e;
 				}
 			?>
 		</div>
@@ -145,6 +150,11 @@
 				echo '<form action="post.php" method="post" enctype="multipart/form-data">';
 				echo '<input class="form-control" placeholder="Tytuł" name="title" type="text" autofocus size="48"><br>';
 				echo '<textarea id="summernote" name="content"></textarea><br>';
+				if(isset($_SESSION['e_post']))
+				{
+					echo $_SESSION['e_post'];
+					unset($_SESSION['e_post']);
+				}
 				echo '<input class="btn btn-secondary btn-block" name="post" type="submit" value="Wyślij"></form></div>';
 			}
 			else
