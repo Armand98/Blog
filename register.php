@@ -104,7 +104,7 @@
                 if($accept)
                 {
                     $date = date('Y-m-d H:i:s');
-                    $sql = "INSERT INTO users VALUES (NULL, '$login', '$password_hash', '$email', '$date')";
+                    $sql = "INSERT INTO users VALUES (NULL, '$login', '$password_hash', '$email', '$date', 0)";
 
                     if($connection->query($sql))
                     {

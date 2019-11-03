@@ -112,7 +112,21 @@
 							$posts .= '<div class="d-flex justify-content-between">';
 							$posts .= "<h5>$login</h5><h5>$date</h5></div>";
 							$posts .= '<hr><div class="text-justify">'.$output.'</div><hr>';
-							$posts .= "$admin</div>";
+							if($_SESSION['isLogged'])
+							{
+								if((isset($_SESSION['privilege'])) && ($_SESSION['privilege'] == 1))
+								{
+									$posts .= "$admin</div>";
+								}
+								else
+								{
+									$posts .= "</div>";
+								}
+							}
+							else
+							{
+								$posts .= "</div>";
+							}
 						}
 						echo $posts;
 					} else {

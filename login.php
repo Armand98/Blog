@@ -31,6 +31,7 @@
                 {
                     $_SESSION['isLogged'] = TRUE;
                     $_SESSION['login'] = $row['login'];
+                    $_SESSION['privilege'] = $row['privilege'];
                     unset($_SESSION['blad']);
                     $result->free_result();
                 } else {
