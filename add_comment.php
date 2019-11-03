@@ -11,28 +11,28 @@
         }
         else
         {
-            if(isset($_POST['post'])) 
+            if(isset($_POST['submit'])) 
             {
                 require_once("Bbcode/BbCode.php");
                 $bbcode = new BbCode();
-                $title = strip_tags($_POST['title']);
-                $content = strip_tags($_POST['content']);
-                $title = mysqli_real_escape_string($connection, $title);
-                $content = mysqli_real_escape_string($connection, $content);
+                $pid = $_SESSION['pid'];
+                $comment_text = $_POST['text'];
+                //$comment_text = mysqli_real_escape_string($connection, $comment_text);
                 $date = date('Y-m-d H:i:s');
                 $login = $_SESSION['login'];
-                $sql = "INSERT INTO posts (login, title ,content, post_date) VALUES ('$login', '$title', '$content', '$date')";
+                $sql = "INSERT INTO comments (comment_login, post_id, comment_date, comment_text) VALUES ('$login', '$pid', '$date', '$comment_text')";
 
-                if($title == "" || $content == "") {
-                    $_SESSION['e_post'] = '<div class="alert alert-danger text-center">Uzupełnij swój wpis!</div>';
-                    header("Location: index.php");
+                if($comment_text == "") {
+                    $_SESSION['e_comment'] = '<div class="alert alert-danger text-center">Uzupełnij swój wpis!</div>';
+                    header("Location: comment_post.php?pid=".$pid);
                 }
                 else
                 {
                     mysqli_query($connection, $sql);
-                    header("Location: index.php");
+                    header("Location: comment_post.php?pid=".$pid);
                 }
             }
+            echo 'nie widze nic';
             $connection->close();
         }
     } catch (Exception $e) {

@@ -61,7 +61,7 @@
 			<a class="navbar-brand"><img src="img/feather-ink-pen-512.png" width="50px" height="50px"></a>
 			<ul class="navbar-nav">
 				<li class="nav-link" href="#">
-					<a class="nav-link" href="#">O mnie</a>
+					<a class="nav-link" href="index.php">Główna</a>
 				</li>
 				<li class="nav-link" href="#">
 					<a class="nav-link" href="#">Zbiór wierszy</a>
@@ -101,8 +101,10 @@
 						$result = mysqli_query($connection, $sql) or die(mysqli_error());
 						$posts = "";
 
-						if(mysqli_num_rows($result) > 0) {
-							while($row = mysqli_fetch_assoc($result)) {
+						if(mysqli_num_rows($result) > 0) 
+						{
+							while($row = mysqli_fetch_assoc($result)) 
+							{
 								$id = $row['post_id'];
 								$title = $row['title'];
 								$login = $row['login'];
@@ -136,7 +138,9 @@
 						$result->free_result();
 					}
 					$connection->close();
-				} catch (Exception $e) {
+				} 
+				catch (Exception $e) 
+				{
 					echo '<span style="color:red;">Błąd serwera! Przepraszamy za niedogoności i prosimy o rejestrację w innym terminie!</span>';
 					echo '<br>Informacja developerska: '.$e;
 				}

@@ -3,25 +3,27 @@
 	if(!isset($_SESSION['isLogged']))
 		$_SESSION['isLogged'] = FALSE;
 	include_once("connect.php");
-
 ?>
 
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Armand Pajor</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 	<link href="css/style.css" rel="stylesheet">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
 	<script src="scripts/summernote-pl-PL.js"></script>
 </head>
+
 <body>
 	<header class="jumbotron" style="margin-bottom: 0px;">
 		<div class="row">
@@ -30,7 +32,7 @@
 				<h3>Blog poświęcony twórczości poetyckiej</h3>
 			</div>
 			<div class="col-lg-3">
-			<?php
+				<?php
 					if($_SESSION['isLogged'] == FALSE)
 					{
 						echo '<form action="login.php" method="post">';
@@ -61,7 +63,7 @@
 			<a class="navbar-brand"><img src="img/feather-ink-pen-512.png" width="50px" height="50px"></a>
 			<ul class="navbar-nav">
 				<li class="nav-link" href="#">
-					<a class="nav-link" href="#">O mnie</a>
+					<a class="nav-link" href="index.php">Główna</a>
 				</li>
 				<li class="nav-link" href="#">
 					<a class="nav-link" href="#">Zbiór wierszy</a>
@@ -97,12 +99,17 @@
 					{
 						require_once("Bbcode/BbCode.php");
 						$bbcode = new BbCode();
-						$sql = "SELECT * FROM posts ORDER BY post_id DESC";
+						$pid = $_GET['pid'];
+						$_SESSION['pid'] = $pid;
+						$sql = "SELECT * FROM posts WHERE post_id=$pid";
 						$result = mysqli_query($connection, $sql) or die(mysqli_error());
 						$posts = "";
+						$comment_table = "";
 
-						if(mysqli_num_rows($result) > 0) {
-							while($row = mysqli_fetch_assoc($result)) {
+						if(mysqli_num_rows($result) > 0) 
+						{
+							while($row = mysqli_fetch_assoc($result)) 
+							{
 								$id = $row['post_id'];
 								$title = $row['title'];
 								$login = $row['login'];
@@ -110,58 +117,63 @@
 								$date = $row['post_date'];
 								$output = $bbcode->Parse($content);
 								$admin = '<div class="p-2">'."<a href='del_post.php?pid=$id'>Usuń</a></div>".'<div class="p-2">'."<a href='index.php?pid=$id'>Edytuj</a></div>";
-								$comment = '<div class="ml-auto p-2">'."<a href='comment_post.php?pid=$id'>Dodaj komentarz</a></div>";
 								$posts .= '<div class="alert alert-dark" role="alert">';
 								$posts .= '<h3 class="alert-heading text-center"><a href="">'.$title.'</a></h3>';
-								$posts .= '<div class="d-flex justify-content-between">';
-								$posts .= "<h5>$login</h5><h5>$date</h5></div>";
-								$posts .= '<hr><div class="text-justify">'.$output.'</div><hr>';
+								$posts .= '<div class="d-flex justify-content-between">'."<h5>$login</h5><h5>$date</h5></div><hr>";
+								$posts .= '<div class="text-justify">'.$output.'</div>';
 								$posts .= '<div class="d-flex">';
 								
 								if($_SESSION['isLogged'])
 								{
 									if((isset($_SESSION['privilege'])) && ($_SESSION['privilege'] == 1))
 									{
-										$posts .= $admin;
+										$posts .= "$admin";
 									}
 								}
-
-								$posts .= $comment;
-								$posts .= "</div></div>";
 							}
-							echo $posts;
-						} else {
-							echo '<h4 class="alert-heading text-center" style="text-align: center;">Brak postów</h4><hr>';
+
+							echo "$posts</div></div><br>";
+							$result->free_result();
+
+							$sql = "SELECT * FROM comments WHERE post_id=$pid";
+							$result = mysqli_query($connection, $sql) or die(mysqli_error());
+
+							while($row = mysqli_fetch_assoc($result)) 
+							{
+								$comment_id = $row['comment_id'];
+								$comment_login = $row['comment_login'];
+								$comment_text = $row['comment_text'];
+								$comment_date = $row['comment_date'];
+								$output = $bbcode->Parse($comment_text);
+								$comment_table .= '<ul class="media-list"><li class="media"><div class="media-body"><strong class="text-success">'.$comment_login.'</strong><p>'.$comment_text.'</p></div></li></ul>';
+							}
+
+							$comment_panel = '<div class="col-md-6 col-sm-12">';
+							$comment_panel .= '<h3>Sekcja komentarzy</h3>';
+							$comment_panel .= '<form action="add_comment.php" method="post">';
+							$comment_panel .= '<textarea class="form-control" name="text" placeholder="napisz komentarz..." rows="3"></textarea><br>';
+							if(isset($_SESSION['e_comment']))
+							{
+									$comment_panel .= '<div class="alert alert-danger">'.$_SESSION['e_comment'].'</div>';
+									unset($_SESSION['e_comment']);	
+							}
+							$comment_panel .= '<input class="btn btn-info btn-block" name="submit" type="submit" value="Zatwierdź"></form><hr>';
+							$comment_panel .= $comment_table;
+							$comment_panel .= '</div>';
+
+							echo $comment_panel;
 						}
 						$result->free_result();
 					}
 					$connection->close();
-				} catch (Exception $e) {
+				} 
+				catch (Exception $e) 
+				{
 					echo '<span style="color:red;">Błąd serwera! Przepraszamy za niedogoności i prosimy o rejestrację w innym terminie!</span>';
 					echo '<br>Informacja developerska: '.$e;
 				}
 			?>
 		</div>
-
-		<?php
-			if($_SESSION['isLogged'])
-			{
-				echo '<div class="col-md-6 form-group" style="padding: 5%;">';
-				echo '<form action="post.php" method="post" enctype="multipart/form-data">';
-				echo '<input class="form-control" placeholder="Tytuł" name="title" type="text" autofocus size="48"><br>';
-				echo '<textarea id="summernote" name="content"></textarea><br>';
-				if(isset($_SESSION['e_post']))
-				{
-					echo $_SESSION['e_post'];
-					unset($_SESSION['e_post']);
-				}
-				echo '<input class="btn btn-secondary btn-block" name="post" type="submit" value="Wyślij"></form></div>';
-			}
-			else
-			{
-				echo '<div class="col-md-6" style="padding: 5%;"><p>Zaloguj się lub <a href="register.php">załóż konto</a> by dodać swoje posty i komentować!</p></div>';
-			}
-		?>
 	</div>
 
 	<footer id="sticky-footer" class="py-4 bg-dark text-white-50">
@@ -180,27 +192,6 @@
 			</div>
 		</div>
 	</footer>
-	<script>
-		$('#summernote').summernote({
-			placeholder: 'Treść',
-			tabsize: 2,
-			height: 300,
-			minHeight: 100,
-			maxHeight: 500,
-			focus: true,
-			lang: 'pl-PL',
-			toolbar: [
-				['style', ['bold', 'italic', 'underline', 'clear']],
-				['font', ['strikethrough', 'superscript', 'subscript']],
-				['fontsize', ['fontsize']],
-				['color', ['color']],
-				['para', ['ul', 'ol', 'paragraph']],
-				['height', ['height']],
-				['view', ['codeview']]
-			],
-		});
-	</script>
 </body>
+
 </html>
-
-
