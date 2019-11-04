@@ -2,8 +2,8 @@
 	session_start();
 	if(!isset($_SESSION['registered']))
 	{
-		header('Location: index.php');
-		exit();
+		//header('Location: index.php');
+		//exit();
 	}
 	else
 	{
@@ -99,7 +99,7 @@
 	<p class="text-center">Możesz już zalogować się na swoje konto.</p>
 	</div>
 
-	<footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+	<footer id="sticky-footer" class="bg-dark">
 		<div class="container-fluid padding">
 			<div class="row text-center">
 				<div class="col-md-12">

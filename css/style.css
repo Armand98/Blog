@@ -37,4 +37,6 @@ div.error {
     margin-bottom: 5px;
 }
 
-body{margin-top:20px;}
+.welcome {
+    margin: 0;
+}
