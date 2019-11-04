@@ -2,8 +2,8 @@
 	session_start();
 	if(!isset($_SESSION['registered']))
 	{
-		//header('Location: index.php');
-		//exit();
+		header('Location: index.php');
+		exit();
 	}
 	else
 	{
@@ -73,7 +73,7 @@
 			<a class="navbar-brand"><img src="img/feather-ink-pen-512.png" width="50px" height="50px"></a>
 			<ul class="navbar-nav">
 				<li class="nav-link" href="#">
-					<a class="nav-link" href="#">O mnie</a>
+					<a class="nav-link" href="index.php">Główna</a>
 				</li>
 				<li class="nav-link" href="#">
 					<a class="nav-link" href="#">Zbiór wierszy</a>
