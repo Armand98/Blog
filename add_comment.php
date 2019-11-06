@@ -13,13 +13,16 @@
         {
             if(isset($_POST['submit'])) 
             {
-                require_once("Bbcode/BbCode.php");
-                $bbcode = new BbCode();
                 $pid = $_SESSION['pid'];
                 $comment_text = $_POST['text'];
-                //$comment_text = mysqli_real_escape_string($connection, $comment_text);
+                $comment_text = mysqli_real_escape_string($connection, $comment_text);
                 $date = date('Y-m-d H:i:s');
-                $login = $_SESSION['login'];
+                if(isset($_POST['login']))
+                {
+                    $login = $_POST['login'];
+                } else {
+                    $login = "Anonymous";
+                }
                 $sql = "INSERT INTO comments (comment_login, post_id, comment_date, comment_text) VALUES ('$login', '$pid', '$date', '$comment_text')";
 
                 if($comment_text == "") {
@@ -32,7 +35,6 @@
                     header("Location: comment_post.php?pid=".$pid);
                 }
             }
-            echo 'nie widze nic';
             $connection->close();
         }
     } catch (Exception $e) {

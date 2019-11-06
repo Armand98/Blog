@@ -13,10 +13,8 @@
         {
             if(isset($_POST['post'])) 
             {
-                require_once("Bbcode/BbCode.php");
-                $bbcode = new BbCode();
                 $title = strip_tags($_POST['title']);
-                $content = strip_tags($_POST['content']);
+                $content = $_POST['content'];
                 $title = mysqli_real_escape_string($connection, $title);
                 $content = mysqli_real_escape_string($connection, $content);
                 $date = date('Y-m-d H:i:s');

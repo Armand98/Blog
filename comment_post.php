@@ -97,8 +97,6 @@
 					} 
 					else 
 					{
-						require_once("Bbcode/BbCode.php");
-						$bbcode = new BbCode();
 						$pid = $_GET['pid'];
 						$_SESSION['pid'] = $pid;
 						$sql = "SELECT * FROM posts WHERE post_id=$pid";
@@ -115,12 +113,11 @@
 								$login = $row['login'];
 								$content = $row['content'];
 								$date = $row['post_date'];
-								$output = $bbcode->Parse($content);
 								$admin = '<div class="p-2">'."<a href='del_post.php?pid=$id'>Usuń</a></div>".'<div class="p-2">'."<a href='index.php?pid=$id'>Edytuj</a></div>";
 								$posts .= '<div class="alert alert-dark" role="alert">';
 								$posts .= '<h3 class="alert-heading text-center"><a href="">'.$title.'</a></h3>';
 								$posts .= '<div class="d-flex justify-content-between">'."<h5>$login</h5><h5>$date</h5></div><hr>";
-								$posts .= '<div class="text-justify">'.$output.'</div>';
+								$posts .= '<div class="text-justify">'.$content.'</div>';
 								$posts .= '<div class="d-flex">';
 								
 								if($_SESSION['isLogged'])
@@ -144,7 +141,6 @@
 								$comment_login = $row['comment_login'];
 								$comment_text = $row['comment_text'];
 								$comment_date = $row['comment_date'];
-								$output = $bbcode->Parse($comment_text);
 								$comment_table .= '<ul class="media-list"><li class="media"><div class="media-body"><strong class="text-success">'.$comment_login.'</strong><p>'.$comment_text.'</p></div></li></ul>';
 							}
 

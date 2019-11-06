@@ -73,7 +73,7 @@
 			<a class="navbar-brand"><img src="img/feather-ink-pen-512.png" width="50px" height="50px"></a>
 			<ul class="navbar-nav">
 				<li class="nav-link" href="#">
-					<a class="nav-link" href="index.php">Główna</a>
+					<a class="nav-link" href="#">O mnie</a>
 				</li>
 				<li class="nav-link" href="#">
 					<a class="nav-link" href="#">Zbiór wierszy</a>
@@ -99,7 +99,7 @@
 	<p class="text-center">Możesz już zalogować się na swoje konto.</p>
 	</div>
 
-	<footer id="sticky-footer" class="bg-dark">
+	<footer id="sticky-footer" class="py-4 bg-dark text-white-50">
 		<div class="container-fluid padding">
 			<div class="row text-center">
 				<div class="col-md-12">
