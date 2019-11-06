@@ -2,8 +2,8 @@
 	session_start();
 	if(!isset($_SESSION['registered']))
 	{
-		header('Location: index.php');
-		exit();
+		//header('Location: index.php');
+		//exit();
 	}
 	else
 	{
@@ -23,7 +23,7 @@
 	include("header.php")
 ?>
 
-<div class="alert alert-success welcome" role="alert">
+<div class="alert alert-success welcome m-0" role="alert">
 	<h4 class="alert-heading text-center">Gratulacje!</h4>
 	<p class="text-center">Możesz już zalogować się na swoje konto.</p>
 </div>
