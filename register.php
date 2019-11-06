@@ -66,7 +66,7 @@
         if(isset($_POST['regulations'])) $_SESSION['fr_regulations'] = true;
 
         try {
-            import("connect.php");
+            include("connect.php");
             mysqli_report(MYSQLI_REPORT_STRICT);
             if (!$connection) 
             {
