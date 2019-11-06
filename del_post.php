@@ -1,6 +1,5 @@
 <?php
     session_start();
-    include_once("connect.php");
 
     if(!isset($_GET['pid']))
     {
@@ -10,11 +9,11 @@
     {
         try
         {
-            $connection = @mysqli_connect($db_host, $db_login, $db_password, $db_name);
+            include_once("connect.php");
             $pid = $_GET['pid'];
-            $sql = "DELETE FROM posts WHERE post_id=$pid";
+            $sql = "DELETE FROM post WHERE post_id=$pid";
             mysqli_query($connection, $sql);
-            header("Location: index.php");
+            header("Location: wiersze.php");
             $connection->close();
         }
         catch (Exception $e) {
