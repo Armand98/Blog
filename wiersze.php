@@ -8,10 +8,11 @@
 ?>
 <div class="row">
 	<div class="col-md-6" style="padding: 5%;">
-		<?php displayContent("SELECT * FROM post ORDER BY post_id DESC", "post_id", "post_date"); ?>
+		<?php displayContent("SELECT * FROM post ORDER BY post_id DESC", "post_id", "date"); ?>
 	</div>
 	<div class="col-md-6 form-group" style="padding: 5%;">
 		<form action="post.php" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="table" value="post">
 			<?php include("displaySummernote.php") ?>
 		</form>
 	</div>

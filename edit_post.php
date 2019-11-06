@@ -19,7 +19,7 @@
                 $content = mysqli_real_escape_string($connection, $content);
                 $date = date('Y-m-d H:i:s');
                 $login = $_SESSION['login'];
-                $sql = "UPDATE posts SET title='$title',content='$content', post_date='$date'";
+                $sql = "UPDATE posts SET title='$title',content='$content', date='$date'";
                 echo "$title<br>$content<br>$date<br>$login<br>$sql";
 
                 if($title == "" || $content == "") {

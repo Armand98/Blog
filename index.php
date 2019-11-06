@@ -8,8 +8,8 @@
 ?>
 
 <div class="row justify-content-center bg-dark">
-	<div class="col-md-3 d-flex justify-content-center p-2">
-		<p class="text-light">Tekst</p>
+	<div class="col-md-3 d-flex justify-content-center p-5">
+		<p class="text-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada faucibus sem, scelerisque luctus dolor facilisis vel. Suspendisse eget erat vel diam blandit ultricies. Vivamus dui nibh, elementum sed sollicitudin at, convallis eget felis. Maecenas sodales a arcu vitae dictum. Etiam tortor neque, bibendum sed consectetur sed, ornare at dui. Ut in pretium ante. Nunc vel rutrum erat.</p>
 	</div>
 	<div class="col-md-6">
 		<div id="slides" class="carousel slide" data-ride="carousel">
@@ -55,8 +55,8 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-md-3 d-flex justify-content-center p-2">
-		<p class="text-light">Tekst</p>
+	<div class="col-md-3 d-flex justify-content-center p-5">
+		<p class="text-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada faucibus sem, scelerisque luctus dolor facilisis vel. Suspendisse eget erat vel diam blandit ultricies. Vivamus dui nibh, elementum sed sollicitudin at, convallis eget felis. Maecenas sodales a arcu vitae dictum. Etiam tortor neque, bibendum sed consectetur sed, ornare at dui. Ut in pretium ante. Nunc vel rutrum erat.</p>
 	</div>
 </div>
 

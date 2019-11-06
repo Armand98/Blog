@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Czas generowania: 06 Lis 2019, 17:38
+-- Czas generowania: 06 Lis 2019, 19:33
 -- Wersja serwera: 5.7.26
 -- Wersja PHP: 7.2.18
 
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `post` (
   `login` varchar(25) COLLATE utf8_polish_ci NOT NULL,
   `title` varchar(50) COLLATE utf8_polish_ci NOT NULL,
   `content` longtext COLLATE utf8_polish_ci NOT NULL,
-  `post_date` datetime NOT NULL,
+  `date` datetime NOT NULL,
   PRIMARY KEY (`post_id`),
   UNIQUE KEY `post_id` (`post_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `puzzle` (
   `login` varchar(25) COLLATE utf8_polish_ci NOT NULL,
   `title` varchar(50) COLLATE utf8_polish_ci NOT NULL,
   `content` longtext COLLATE utf8_polish_ci NOT NULL,
-  `puzzle_date` datetime NOT NULL,
+  `date` datetime NOT NULL,
   PRIMARY KEY (`puzzle_id`),
   UNIQUE KEY `post_id` (`puzzle_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `quote` (
   `login` varchar(25) COLLATE utf8_polish_ci NOT NULL,
   `title` varchar(50) COLLATE utf8_polish_ci NOT NULL,
   `content` longtext COLLATE utf8_polish_ci NOT NULL,
-  `quote_date` datetime NOT NULL,
+  `date` datetime NOT NULL,
   PRIMARY KEY (`quote_id`),
   UNIQUE KEY `post_id` (`quote_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
@@ -103,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `login` varchar(20) COLLATE utf8_polish_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_polish_ci NOT NULL,
   `email` varchar(50) COLLATE utf8_polish_ci NOT NULL,
-  `user_date` datetime NOT NULL,
+  `date` datetime NOT NULL,
   `privilege` int(2) NOT NULL DEFAULT '0',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_id` (`user_id`)
@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Zrzut danych tabeli `user`
 --
 
-INSERT INTO `user` (`user_id`, `login`, `password`, `email`, `user_date`, `privilege`) VALUES
+INSERT INTO `user` (`user_id`, `login`, `password`, `email`, `date`, `privilege`) VALUES
 (1, 'Armand', '$2y$10$AuVpu21.xY4FEJ342WP5muoFQMhwN9Kl6NySotFsLOZHKhXGgbo/m', 'armand@gmail.com', '2019-11-03 20:32:59', 1);
 COMMIT;
 

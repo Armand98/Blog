@@ -23,7 +23,7 @@
                 } else {
                     $login = "Anonymous";
                 }
-                $sql = "INSERT INTO comments (comment_login, post_id, comment_date, comment_text) VALUES ('$login', '$pid', '$date', '$comment_text')";
+                $sql = "INSERT INTO comments (comment_login, post_id, date, comment_text) VALUES ('$login', '$pid', '$date', '$comment_text')";
 
                 if($comment_text == "") {
                     $_SESSION['e_comment'] = '<div class="alert alert-danger text-center">Uzupełnij swój wpis!</div>';
