@@ -12,6 +12,6 @@
     }
     else
     {
-        echo '<div class="col-md-6" style="padding: 5%;"><p>Zaloguj się lub <a href="register.php">załóż konto</a> by dodać swoje posty i komentować!</p></div>';
+        echo '<div class="col-md-6" style="padding: 5%;"><p>Zaloguj się lub <a href="register.php">załóż konto</a> by dodać swoje posty!</p></div>';
     }
 ?>
