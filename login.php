@@ -7,11 +7,9 @@
         exit();
     }
 
-    require_once("connect.php");
-
     try 
     {
-        $connection = @mysqli_connect($db_host, $db_login, $db_password, $db_name);
+        include("connect.php");
         if (!$connection) 
         {
             throw new Exception(mysqli_connect_errno());

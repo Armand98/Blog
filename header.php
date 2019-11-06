@@ -47,7 +47,7 @@
 			<a class="navbar-brand"><img src="img/feather-ink-pen-512.png" width="50px" height="50px"></a>
 			<ul class="navbar-nav">
 				<li class="nav-link" href="#">
-					<a class="nav-link" href="index.php">Główna</a>
+					<a class="nav-link" href="index.php">O mnie</a>
 				</li>
 				<li class="nav-link" href="#">
 					<a class="nav-link" href="wiersze.php">Zbiór wierszy</a>
