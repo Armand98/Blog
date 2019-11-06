@@ -23,16 +23,15 @@
 
                 if($title == "" || $content == "") {
                     $_SESSION['e_post'] = '<div class="alert alert-danger text-center">Uzupełnij swój wpis!</div>';
-                    header("Location: wiersze.php");
                 }
                 else
                 {
                     mysqli_query($connection, $sql);
                     if($table == 'post')
                         header("Location: wiersze.php");
-                    if($table == 'quote')
+                    else if($table == 'quote')
                         header("Location: cytaty.php");
-                    if($table == 'puzzle')
+                    else if($table == 'puzzle')
                         header("Location: zagadki.php");
                 }
             }
