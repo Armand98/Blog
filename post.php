@@ -12,7 +12,6 @@
             if(isset($_POST['post'])) 
             {
                 $table = $_POST['table'];
-                echo $table;
                 $title = strip_tags($_POST['title']);
                 $content = $_POST['content'];
                 $title = mysqli_real_escape_string($connection, $title);
