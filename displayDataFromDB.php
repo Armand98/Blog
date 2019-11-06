@@ -1,5 +1,5 @@
 <?php
-    function displayContent($sql)
+    function displayContent($sql, $rowId, $rowDate)
     {
         try
         {
@@ -17,11 +17,11 @@
                 {
                     while($row = mysqli_fetch_assoc($result)) 
                     {
-                        $id = $row['post_id'];
+                        $id = $row[$rowId];
                         $title = $row['title'];
                         $login = $row['login'];
                         $content = $row['content'];
-                        $date = $row['post_date'];
+                        $date = $row[$rowDate];
                         $admin = '<div class="p-2">'."<a href='del_post.php?pid=$id'>Usuń</a></div>".'<div class="p-2">'."<a href='index.php?pid=$id'>Edytuj</a></div>";
                         $comment = '<div class="ml-auto p-2">'."<a href='comment_post.php?pid=$id'>Dodaj komentarz</a></div>";
                         $posts .= '<div class="alert alert-dark" role="alert">';

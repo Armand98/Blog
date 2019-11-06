@@ -2,13 +2,14 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
+    margin: 0;
 }
 
 footer {
     background-color: #3f3f3f;
     color: #d5d5d5;
 }
- 
+
 #sticky-footer {
     flex-shrink: none;
   }

@@ -18,7 +18,7 @@
         {
             $login = $_POST['login'];
             $password = $_POST['password'];
-            $sql = sprintf("SELECT * FROM users WHERE login='%s'", mysqli_real_escape_string($connection, $login));
+            $sql = sprintf("SELECT * FROM user WHERE login='%s'", mysqli_real_escape_string($connection, $login));
         
             if($result = @mysqli_query($connection, $sql))
             {

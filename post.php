@@ -1,10 +1,8 @@
 <?php
     session_start();
     include_once("connect.php");
-
     try 
     {
-        $connection = @mysqli_connect($db_host, $db_login, $db_password, $db_name);
         if (!$connection) 
         {
             throw new Exception(mysqli_connect_errno());
