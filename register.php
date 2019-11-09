@@ -49,7 +49,7 @@
             $_SESSION['e_regulations']="Zaakceptuj regulamin!";
         }
 
-        $secret_key = "6LdU58AUAAAAAGo7ADUCm8b00wKZtbj_R82VD7Kr";
+        $secret_key = "";
         $check = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret_key.'&response='.$_POST['g-recaptcha-response']);
         $answer = json_decode($check);
 
