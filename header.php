@@ -14,15 +14,22 @@
 			<div class="col-lg-9">
 				<h1>Wiersze, cytaty i zagadki</h1>
 				<h3>Blog poświęcony twórczości poetyckiej</h3>
+				<?php
+					if(!$_SESSION['isLogged'])
+					{
+						echo '<p>Nie masz jeszcze konta? <a href="register.php">Zarejestruj się</a> już dziś!</p>';
+					}
+				?>
 			</div>
 			<div class="col-lg-3">
 			<?php
-					if($_SESSION['isLogged'] == FALSE)
+					if(!$_SESSION['isLogged'])
 					{
 						echo '<form action="login.php" method="post">';
 						echo '<input class="form-control" placeholder="Login" type="text" name="login">';
 						echo '<br><input class="form-control" placeholder="Hasło" type="password" name="password"><br>';
 						echo '<input class="btn btn-secondary btn-block" type="submit" value="Zaloguj się"></form>';
+						
 						if(isset($_SESSION['blad']))
 						{
 							echo $_SESSION['blad'];

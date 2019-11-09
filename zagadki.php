@@ -7,17 +7,18 @@
 	include("displayDataFromDB.php");
 ?>
 
-<div class="row">
+<div class="row flex-column-reverse flex-md-row">
 	<div class="col-md-6" style="padding: 5%;">
-		<?php displayContent("SELECT * FROM puzzle ORDER BY id DESC", 3); ?>
+		<?php displayContent("SELECT * FROM puzzle ORDER BY id DESC", 1); ?>
 	</div>
-	<div class="col-md-6 form-group" style="padding: 5%;">
-		<form action="post.php" method="post" enctype="multipart/form-data">
-			<input type="hidden" name="table" value="puzzle">
-			<?php include("displaySummernote.php") ?>
-		</form>
+	<div class="col-md-6" style="padding-top: 10%;">
+		<div class="form-group d-flex justify-content-center">
+			<form action="post.php" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="table" value="post">
+				<?php include("displaySummernote.php") ?>
+			</form>
+		</div>
 	</div>
 </div>
 
 <?php include("footer.php") ?>
-
