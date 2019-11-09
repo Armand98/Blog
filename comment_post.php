@@ -12,8 +12,9 @@
 	<div class="col-md-6" style="padding: 5%;">	
 		<?php 
 			$pid = $_GET['pid'];
-			displayContent("SELECT * FROM posts WHERE post_id=$pid"); 
-			displayComments("SELECT * FROM comments WHERE post_id=$pid");
+			$type = $_GET['type'];
+			displayContent("SELECT * FROM post WHERE id=$pid", $type); 
+			displayComments("SELECT * FROM comment WHERE post_id=$pid AND type=$type ORDER BY id DESC", $type);
 		?>
 	</div>
 </div>

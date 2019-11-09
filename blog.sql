@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Czas generowania: 06 Lis 2019, 19:33
+-- Czas generowania: 09 Lis 2019, 21:54
 -- Wersja serwera: 5.7.26
 -- Wersja PHP: 7.2.18
 
@@ -30,15 +30,31 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE IF NOT EXISTS `comment` (
-  `comment_id` int(11) NOT NULL AUTO_INCREMENT,
-  `comment_login` varchar(25) COLLATE utf8_polish_ci NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `login` varchar(25) COLLATE utf8_polish_ci NOT NULL,
   `post_id` int(11) NOT NULL,
-  `comment_date` datetime NOT NULL,
-  `comment_text` varchar(255) COLLATE utf8_polish_ci NOT NULL,
-  PRIMARY KEY (`comment_id`),
-  UNIQUE KEY `comment_id` (`comment_id`),
+  `date` datetime NOT NULL,
+  `text` varchar(255) COLLATE utf8_polish_ci NOT NULL,
+  `type` int(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `comment_id` (`id`),
   KEY `post_id` (`post_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+--
+-- Zrzut danych tabeli `comment`
+--
+
+INSERT INTO `comment` (`id`, `login`, `post_id`, `date`, `text`, `type`) VALUES
+(1, 'Armand', 1, '2019-11-09 20:52:00', 'Komentarz testowy', 1),
+(2, 'Anonymous', 1, '2019-11-09 21:34:01', '123', 1),
+(3, 'Anonymous', 1, '2019-11-09 21:35:55', 'test', 1),
+(4, 'Anonymous', 1, '2019-11-09 21:39:45', '123456789', 1),
+(6, 'Anonymous', 1, '2019-11-09 21:46:06', '54564564564654', 1),
+(7, 'Anonymous', 1, '2019-11-09 21:46:28', 'love', 1),
+(8, 'Armand', 1, '2019-11-09 21:51:16', 'looowe', 1),
+(9, 'Armand', 1, '2019-11-09 21:52:56', '123', 2),
+(10, 'Armand', 1, '2019-11-09 21:53:11', '321', 3);
 
 -- --------------------------------------------------------
 
@@ -48,14 +64,21 @@ CREATE TABLE IF NOT EXISTS `comment` (
 
 DROP TABLE IF EXISTS `post`;
 CREATE TABLE IF NOT EXISTS `post` (
-  `post_id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `login` varchar(25) COLLATE utf8_polish_ci NOT NULL,
   `title` varchar(50) COLLATE utf8_polish_ci NOT NULL,
   `content` longtext COLLATE utf8_polish_ci NOT NULL,
   `date` datetime NOT NULL,
-  PRIMARY KEY (`post_id`),
-  UNIQUE KEY `post_id` (`post_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `post_id` (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+--
+-- Zrzut danych tabeli `post`
+--
+
+INSERT INTO `post` (`id`, `login`, `title`, `content`, `date`) VALUES
+(1, 'Armand', 'test1', '<p>test11111<br></p>', '2019-11-09 18:18:52');
 
 -- --------------------------------------------------------
 
@@ -65,14 +88,21 @@ CREATE TABLE IF NOT EXISTS `post` (
 
 DROP TABLE IF EXISTS `puzzle`;
 CREATE TABLE IF NOT EXISTS `puzzle` (
-  `puzzle_id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `login` varchar(25) COLLATE utf8_polish_ci NOT NULL,
   `title` varchar(50) COLLATE utf8_polish_ci NOT NULL,
   `content` longtext COLLATE utf8_polish_ci NOT NULL,
   `date` datetime NOT NULL,
-  PRIMARY KEY (`puzzle_id`),
-  UNIQUE KEY `post_id` (`puzzle_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `post_id` (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+--
+-- Zrzut danych tabeli `puzzle`
+--
+
+INSERT INTO `puzzle` (`id`, `login`, `title`, `content`, `date`) VALUES
+(1, 'Armand', 'Zagadka1', '<p>Zagadka1<br></p>', '2019-11-09 19:35:54');
 
 -- --------------------------------------------------------
 
@@ -82,14 +112,21 @@ CREATE TABLE IF NOT EXISTS `puzzle` (
 
 DROP TABLE IF EXISTS `quote`;
 CREATE TABLE IF NOT EXISTS `quote` (
-  `quote_id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `login` varchar(25) COLLATE utf8_polish_ci NOT NULL,
   `title` varchar(50) COLLATE utf8_polish_ci NOT NULL,
   `content` longtext COLLATE utf8_polish_ci NOT NULL,
   `date` datetime NOT NULL,
-  PRIMARY KEY (`quote_id`),
-  UNIQUE KEY `post_id` (`quote_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `post_id` (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+--
+-- Zrzut danych tabeli `quote`
+--
+
+INSERT INTO `quote` (`id`, `login`, `title`, `content`, `date`) VALUES
+(1, 'Armand', 'cytat1', '<p>cytat1<br></p>', '2019-11-09 19:36:07');
 
 -- --------------------------------------------------------
 

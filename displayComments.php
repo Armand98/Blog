@@ -1,5 +1,5 @@
 <?php
-    function displayComments($sql)
+    function displayComments($sql, $type)
     {
         try
         {
@@ -14,16 +14,16 @@
                 $comment_table = "";
                 while($row = mysqli_fetch_assoc($result)) 
                 {
-                    $comment_id = $row['comment_id'];
-                    $comment_login = $row['comment_login'];
-                    $comment_text = $row['comment_text'];
-                    $comment_date = $row['comment_date'];
+                    $comment_id = $row['id'];
+                    $comment_login = $row['login'];
+                    $comment_text = $row['text'];
+                    $comment_date = $row['date'];
                     $comment_table .= '<ul class="media-list"><li class="media"><div class="media-body"><strong class="text-success">'.$comment_login.'</strong><p>'.$comment_text.'</p></div></li></ul>';
                 }
-
+                $pid = $_GET['pid'];
                 $comment_panel = '<div class="col-md-6 col-sm-12">';
                 $comment_panel .= '<h3>Sekcja komentarzy</h3>';
-                $comment_panel .= '<form action="add_comment.php" method="post">';
+                $comment_panel .= "<form action='add_comment.php?type=$type&pid=$pid' method='post'>";
                 $comment_panel .= '<textarea class="form-control" name="text" placeholder="napisz komentarz..." rows="3"></textarea><br>';
             
                 if(isset($_SESSION['e_comment']))

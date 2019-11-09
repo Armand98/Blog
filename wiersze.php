@@ -6,9 +6,10 @@
 	include("header.php");
 	include("displayDataFromDB.php");
 ?>
+
 <div class="row">
 	<div class="col-md-6" style="padding: 5%;">
-		<?php displayContent("SELECT * FROM post ORDER BY post_id DESC", "post_id", "date"); ?>
+		<?php displayContent("SELECT * FROM post ORDER BY id DESC", 1); ?>
 	</div>
 	<div class="col-md-6 form-group" style="padding: 5%;">
 		<form action="post.php" method="post" enctype="multipart/form-data">

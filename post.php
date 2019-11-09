@@ -32,6 +32,8 @@
                         header("Location: cytaty.php");
                     else if($table == 'puzzle')
                         header("Location: zagadki.php");
+                    else
+                        header("Location: index.php");
                 }
             }
             $connection->close();

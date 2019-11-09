@@ -2,8 +2,8 @@
 	session_start();
 	if(!isset($_SESSION['registered']))
 	{
-		//header('Location: index.php');
-		//exit();
+		header('Location: index.php');
+		exit();
 	}
 	else
 	{
