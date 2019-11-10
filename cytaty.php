@@ -9,7 +9,7 @@
 
 <div class="row flex-column-reverse flex-md-row">
 	<div class="col-md-6" style="padding: 5%;">
-		<?php displayContent("SELECT * FROM quote ORDER BY id DESC", 1); ?>
+		<?php displayContent("SELECT * FROM quote ORDER BY id DESC", 2); ?>
 	</div>
 	<div class="col-md-6" style="padding-top: 10%;">
 		<div class="form-group d-flex justify-content-center">
