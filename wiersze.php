@@ -11,7 +11,7 @@
 	<div class="col-md-6" style="padding: 5%;">
 		<?php displayContent("SELECT * FROM post ORDER BY id DESC", 1); ?>
 	</div>
-	<div class="col-md-6" style="padding-top: 10%;">
+	<div class="col-md-6" style="padding: 5%;">
 		<div class="form-group d-flex justify-content-center">
 			<form action="post.php" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="table" value="post">
