@@ -13,7 +13,16 @@
 		<?php 
 			$pid = $_GET['pid'];
 			$type = $_GET['type'];
-			displayContent("SELECT * FROM post WHERE id=$pid", $type); 
+			$table = "post";
+			if ($type == 2)
+			{
+				$table = "quote";
+			}
+			else if ($type == 3)
+			{
+				$table = "puzzle";
+			}
+			displayContent("SELECT * FROM $table WHERE id=$pid", $type); 
 			displayComments("SELECT * FROM comment WHERE post_id=$pid AND type=$type ORDER BY id DESC", $type);
 		?>
 	</div>
