@@ -22,7 +22,7 @@
                         $login = $row['login'];
                         $content = $row['content'];
                         $date = $row['date'];
-                        $admin = '<div class="p-2">'."<a href='del_post.php?pid=$id'>Usuń</a></div>".'<div class="p-2">'."<a href='index.php?pid=$id'>Edytuj</a></div>";
+                        $admin = '<div class="p-2">'."<a href='del_post.php?pid=$id&type=$type'>Usuń</a></div>".'<div class="p-2">'."<a href='index.php?pid=$id'>Edytuj</a></div>";
                         $comment = '<div class="ml-auto p-2">'."<a href='comment_post.php?pid=$id&type=$type'>Dodaj komentarz</a></div>";
                         $posts .= '<div class="alert alert-dark" role="alert">';
                         $posts .= '<h3 class="alert-heading text-center"><a href="">'.$title.'</a></h3>';

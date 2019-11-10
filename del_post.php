@@ -11,9 +11,22 @@
         {
             include_once("connect.php");
             $pid = $_GET['pid'];
-            $sql = "DELETE FROM post WHERE post_id=$pid";
+            $type = $_GET['type'];
+            $table = "post";
+            $header = "wiersze";
+			if ($type == 2)
+			{
+                $table = "quote";
+                $header = "cytaty";
+			}
+			else if ($type == 3)
+			{
+                $table = "puzzle";
+                $header = "zagadki";
+			}
+            $sql = "DELETE FROM $table WHERE id=$pid";
             mysqli_query($connection, $sql);
-            header("Location: wiersze.php");
+            header("Location: $header.php");
             $connection->close();
         }
         catch (Exception $e) {
