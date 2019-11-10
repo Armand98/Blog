@@ -23,8 +23,10 @@
 				$table = "puzzle";
 			}
 			displayContent("SELECT * FROM $table WHERE id=$pid", $type); 
-			displayComments("SELECT * FROM comment WHERE post_id=$pid AND type=$type ORDER BY id DESC", $type);
 		?>
+	</div>
+	<div class="col-md-6 d-flex justify-content-center" style="padding: 5%;">
+			<?php displayComments("SELECT * FROM comment WHERE post_id=$pid AND type=$type ORDER BY id DESC", $type); ?>
 	</div>
 </div>
 
