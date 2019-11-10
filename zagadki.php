@@ -14,7 +14,7 @@
 	<div class="col-md-6" style="padding: 5%;">
 		<div class="form-group d-flex justify-content-center">
 			<form action="post.php" method="post" enctype="multipart/form-data">
-				<input type="hidden" name="table" value="post">
+				<input type="hidden" name="table" value="puzzle">
 				<?php include("displaySummernote.php") ?>
 			</form>
 		</div>
