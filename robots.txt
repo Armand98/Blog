@@ -1,1 +1,3 @@
 User-agent: *
+
+Sitemap: http://armand-pajor.000webhostapp.com/sitemap.xml
