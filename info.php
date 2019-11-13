@@ -1,6 +1,9 @@
 <div class="row justify-content-center bg-dark">
 	<div class="col-md-3 d-flex justify-content-center p-5">
-		<p class="text-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada faucibus sem, scelerisque luctus dolor facilisis vel. Suspendisse eget erat vel diam blandit ultricies. Vivamus dui nibh, elementum sed sollicitudin at, convallis eget felis. Maecenas sodales a arcu vitae dictum. Etiam tortor neque, bibendum sed consectetur sed, ornare at dui. Ut in pretium ante. Nunc vel rutrum erat.</p>
+		<p class="text-light">Mam na imię Armand i jestem studentem informatyki na Uniwersytecie Śląskim. Pasjonuję się nauką, którą studiuję oraz posiadam liczne hobby. Fotografia jest jednym z nich.<br><br>
+		Od dawna interesuję się poezją, której poświęcony jest mój blog. Uwielbiam przenieść się w poetycki świat, poznawać cytaty rzewne i wesołe. 
+		Fascynują mnie rozbudowane zagadki, na które odpowiedź nie jest trywialna.<br><br> Kocham pisać, dumać i czytać! Do tego Was również zachęcam - 
+		do dzielenia się swoimi refleksjami w postaci wierszy, cytatów i zagadek!</p>
 	</div>
 	<div class="col-md-6">
 		<div id="slides" class="carousel slide" data-ride="carousel">
@@ -47,7 +50,9 @@
 		</div>
 	</div>
 	<div class="col-md-3 d-flex justify-content-center p-5">
-		<p class="text-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada faucibus sem, scelerisque luctus dolor facilisis vel. Suspendisse eget erat vel diam blandit ultricies. Vivamus dui nibh, elementum sed sollicitudin at, convallis eget felis. Maecenas sodales a arcu vitae dictum. Etiam tortor neque, bibendum sed consectetur sed, ornare at dui. Ut in pretium ante. Nunc vel rutrum erat.</p>
+		<p class="text-light"><i>"Cogito ergo sum"</i><br>~ Kartezjusz<br><br>
+		<i>"Wielka poezja, będąc wielką i będąc poezją, nie może nie zachwycać nas, a więc zachwyca."</i><br>~ Witold Gombrowicz - Ferdydurke<br><br>
+		<i>"Poeta to taki, co umie w ładny sposób być nieszczęśliwy."</i><br>~ Stanisław Lem</p>
 	</div>
 </div>
 
