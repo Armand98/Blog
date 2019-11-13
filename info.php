@@ -1,6 +1,7 @@
 <div class="row justify-content-center bg-dark">
 	<div class="col-md-3 d-flex justify-content-center p-5">
-		<p class="text-light">Mam na imię Armand i jestem studentem informatyki na Uniwersytecie Śląskim. Pasjonuję się nauką, którą studiuję oraz posiadam liczne hobby. Fotografia jest jednym z nich.<br><br>
+		<p class="text-light">Mam na imię Armand i jestem studentem informatyki na <a href="http://www.us.edu.pl/" target="_blank">Uniwersytecie Śląskim</a>. 
+		Pasjonuję się nauką, którą studiuję oraz posiadam liczne hobby. <a href="https://gurushots.com/armand.pajor/photos" target="_blank">Fotografia</a> jest jednym z nich.<br><br>
 		Od dawna interesuję się poezją, której poświęcony jest mój blog. Uwielbiam przenieść się w poetycki świat, poznawać cytaty rzewne i wesołe. 
 		Fascynują mnie rozbudowane zagadki, na które odpowiedź nie jest trywialna.<br><br> Kocham pisać, dumać i czytać! Do tego Was również zachęcam - 
 		do dzielenia się swoimi refleksjami w postaci wierszy, cytatów i zagadek!</p>
