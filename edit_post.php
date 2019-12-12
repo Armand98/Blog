@@ -21,7 +21,6 @@
                 } else if ($type == 3) {
                     $table = "puzzle";
                 } else {
-                    exit();
                     echo '<script>alert("Nie kombinuj ;)")</script>';
                     echo '<script>window.location.replace("http://localhost/blog/index.php")</script>';
                 }
