@@ -22,13 +22,13 @@
                         $login = $row['login'];
                         $content = $row['content'];
                         $date = $row['date'];
-                        $adminPanel = '<div class="p-2">'."<a href='del_post.php?pid=$id&type=$type'>Usuń</a></div>".'<div class="p-2">'."<a href='edit_post.php?pid=$id'>Edytuj</a></div>";
+                        $adminPanel = '<div class="p-2">'."<a href='del_post.php?pid=$id&type=$type'>Usuń</a></div>".'<div class="p-2">'."<a href='displayEditingPost.php?pid=$id&type=$type'>Edytuj</a></div>";
                         $comment = '<div class="ml-auto p-2">'."<a href='comment_post.php?pid=$id&type=$type'>Dodaj komentarz</a></div>";
                         $posts .= '<div class="alert alert-dark" role="alert">';
-                        $posts .= '<h3 class="alert-heading text-center">'."<a href='comment_post.php?pid=$id&type=$type'>".$title.'</a></h3>';
+                        $posts .= '<h3 class="alert-heading text-center postTitle">'."<a href='comment_post.php?pid=$id&type=$type'>".$title.'</a></h3>';
                         $posts .= '<div class="d-flex justify-content-between">';
                         $posts .= "<h5>$login</h5><h5>$date</h5></div>";
-                        $posts .= '<hr><div class="text-justify">'.$content.'</div><hr>';
+                        $posts .= '<hr><div class="text-justify postContent">'.$content.'</div><hr>';
                         $posts .= '<div class="d-flex">';
                         
                         if($_SESSION['isLogged'])
