@@ -35,7 +35,6 @@
 
                 if($title == "" || $content == "") {
                     $_SESSION['e_post'] = '<div class="alert alert-danger text-center">Uzupełnij swój wpis!</div>';
-                    header("Location: index.php");
                 }
                 else
                 {
