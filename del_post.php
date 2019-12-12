@@ -12,21 +12,30 @@
             include_once("connect.php");
             $pid = $_GET['pid'];
             $type = $_GET['type'];
-            $table = "post";
-            $header = "wiersze";
-			if ($type == 2)
-			{
-                $table = "quote";
-                $header = "cytaty";
-			}
-			else if ($type == 3)
-			{
-                $table = "puzzle";
-                $header = "zagadki";
-			}
+
+            if($type == 1) {
+				$table = "post";
+			} else if ($type == 2) {
+				$table = "quote";
+			} else if ($type == 3) {
+				$table = "puzzle";
+			} else {
+				echo '<script>alert("Nie kombinuj ;)")</script>';
+				echo '<script>window.location.replace("http://localhost/blog/index.php")</script>';
+            }
+            
             $sql = "DELETE FROM $table WHERE id=$pid";
             mysqli_query($connection, $sql);
-            header("Location: $header.php");
+
+            if($table == 'post')
+                header("Location: wiersze.php");
+            else if($table == 'quote')
+                header("Location: cytaty.php");
+            else if($table == 'puzzle')
+                header("Location: zagadki.php");
+            else
+                header("Location: index.php");
+                
             $connection->close();
         }
         catch (Exception $e) {
