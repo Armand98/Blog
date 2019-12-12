@@ -60,20 +60,14 @@
 					<a class="nav-link" href="index.php">O mnie</a>
 				</li>
 				<li class="nav-link" href="#">
-					<a class="nav-link" href="wiersze.php">Zbiór wierszy</a>
+					<a class="nav-link" href="wiersze.php">Wiersze</a>
 				</li>
 				<li class="nav-link" href="#">
-					<a class="nav-link dropdown-toggle" data-toggle="dropdown" data-target="dropdown_target" href="#">
-						Inne
-						<span class="caret"></span>
-					</a>
-					<div class="dropdown-menu" aria-labelledby="dropdown_target">
-						<ul class="navbar-nav">
-							<a class="dropdown-item" href="cytaty.php">Cytaty</a>
-							<a class="dropdown-item" href="zagadki.php">Zagadki</a>
-						</ul>
-					</div>
-				</li>	
+					<a class="nav-link" href="cytaty.php">Cytaty</a>
+				</li>
+				<li class="nav-link" href="#">
+					<a class="nav-link" href="zagadki.php">Zagadki</a>
+				</li>
 			</ul>
 		</div>
 	</nav>
