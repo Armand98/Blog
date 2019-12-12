@@ -1,4 +1,5 @@
 <?php
+    session_start();
     try 
     {
         include_once("connect.php");
@@ -30,7 +31,6 @@
                 $title = mysqli_real_escape_string($connection, $title);
                 $content = mysqli_real_escape_string($connection, $content);
                 $date = date('Y-m-d H:i:s');
-                $login = $_SESSION['login'];
                 $sql = "UPDATE $table SET title='$title',content='$content', date='$date' WHERE id='$pid'";
 
                 if($title == "" || $content == "") {
